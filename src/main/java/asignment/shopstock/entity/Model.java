@@ -1,8 +1,18 @@
 package asignment.shopstock.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.persistence.*;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,
+              property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = PersonalComputer.class, name = "personalcomputer"),
+        @JsonSubTypes.Type(value = Refrigerator.class, name = "refrigerator"),
+        @JsonSubTypes.Type(value = Smartphone.class, name = "smartphone"),
+        @JsonSubTypes.Type(value = Television.class, name = "television") })
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Model {
@@ -66,10 +76,6 @@ public abstract class Model {
 
     public void setCost(float cost) {
         this.cost = cost;
-    }
-
-    public Item getItem() {
-        return item;
     }
 
     public void setItem(Item item) {

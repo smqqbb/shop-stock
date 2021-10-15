@@ -1,7 +1,8 @@
 package asignment.shopstock.entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,8 +18,13 @@ public class Item{
     private boolean orderOnline;
     private boolean installmentOption;
 
+    public Set<Model> getModels() {
+        return models;
+    }
+
     @OneToMany(mappedBy = "item")
     private Set<Model> models;
+
 
     public String getItemName() {
         return itemName;

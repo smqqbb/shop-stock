@@ -1,5 +1,8 @@
 package asignment.shopstock.entity;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Refrigerator extends Model{
     private long serialNumber;
 
