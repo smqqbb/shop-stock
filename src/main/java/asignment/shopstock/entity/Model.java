@@ -15,6 +15,8 @@ import javax.persistence.*;
         @JsonSubTypes.Type(value = Television.class, name = "television") })
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING,
+                    name = "type")
 public abstract class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +26,7 @@ public abstract class Model {
     private String size;
     private String color;
     private boolean available;
-    private float cost;
+    private long cost;
 
     @ManyToOne
     @JoinColumn
@@ -70,11 +72,11 @@ public abstract class Model {
         this.available = available;
     }
 
-    public float getCost() {
+    public long getCost() {
         return cost;
     }
 
-    public void setCost(float cost) {
+    public void setCost(long cost) {
         this.cost = cost;
     }
 
