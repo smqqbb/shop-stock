@@ -1,0 +1,349 @@
+openapi: 3.0.1
+info:
+  title: Shopstock API
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /models:
+    get:
+      tags:
+      - Filter
+      operationId: filter
+      parameters:
+      - name: modelName
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: color
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromCost
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toCost
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: sortDSC
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sortASC
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  oneOf:
+                  - $ref: '#/components/schemas/PersonalComputer'
+                  - $ref: '#/components/schemas/Refrigerator'
+                  - $ref: '#/components/schemas/Smartphone'
+                  - $ref: '#/components/schemas/Television'
+    post:
+      tags:
+      - Model
+      operationId: addOne
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Model'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+    delete:
+      tags:
+      - Model
+      operationId: deleteOne
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /items:
+    get:
+      tags:
+      - Item
+      operationId: getOne
+      parameters:
+      - name: id
+        in: query
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Item'
+    post:
+      tags:
+      - Item
+      operationId: addOne_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Item'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /models/television:
+    get:
+      tags:
+      - Filter
+      operationId: filter_1
+      parameters:
+      - name: technology
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: modelType
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Television'
+  /models/smartphone:
+    get:
+      tags:
+      - Filter
+      operationId: filter_2
+      parameters:
+      - name: fromNumberOfCameras
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toNumberOfCameras
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: fromStorage
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toStorage
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Smartphone'
+  /models/refrigerator:
+    get:
+      tags:
+      - Filter
+      operationId: filter_3
+      parameters:
+      - name: compressorType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: fromNumberOfDoors
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: toNumberOfDoors
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Refrigerator'
+  /models/personalcomputer:
+    get:
+      tags:
+      - Filter
+      operationId: filter_4
+      parameters:
+      - name: processorType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: modelType
+        in: query
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonalComputer'
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        itemName:
+          type: string
+        country:
+          type: string
+        brand:
+          type: string
+        orderOnline:
+          type: boolean
+        installmentOption:
+          type: boolean
+        models:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+    Model:
+      required:
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        modelName:
+          type: string
+        size:
+          type: string
+        color:
+          type: string
+        available:
+          type: boolean
+        cost:
+          type: integer
+          format: int64
+        item:
+          $ref: '#/components/schemas/Item'
+        type:
+          type: string
+      discriminator:
+        propertyName: type
+    PersonalComputer:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Model'
+      - type: object
+        properties:
+          modelType:
+            type: string
+          processorType:
+            type: string
+    Refrigerator:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Model'
+      - type: object
+        properties:
+          numberOfDoors:
+            type: integer
+            format: int64
+          compressorType:
+            type: string
+    Smartphone:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Model'
+      - type: object
+        properties:
+          storageInGigs:
+            type: integer
+            format: int64
+          numberOfCameras:
+            type: integer
+            format: int64
+    Television:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Model'
+      - type: object
+        properties:
+          modelType:
+            type: string
+          technology:
+            type: string
