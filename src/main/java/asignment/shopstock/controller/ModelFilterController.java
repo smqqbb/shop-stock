@@ -2,7 +2,7 @@ package asignment.shopstock.controller;
 
 import asignment.shopstock.entity.Model;
 import asignment.shopstock.repository.ModelRepository;
-import asignment.shopstock.specifications.GeneralSpecifications;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +13,7 @@ import java.util.List;
 
 import static asignment.shopstock.specifications.ModelSpecifications.*;
 
+@Tag(name = "Filter")
 @RestController
 public class ModelFilterController {
     @Autowired

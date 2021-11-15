@@ -2,11 +2,12 @@ package asignment.shopstock.controller;
 
 import asignment.shopstock.entity.Item;
 import asignment.shopstock.service.ItemService;
-import org.apache.coyote.Response;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "Item")
 @RestController
 @RequestMapping("/items")
 public class ItemController {
@@ -14,12 +15,16 @@ public class ItemController {
     ItemService itemService;
 
     @GetMapping
-    public ResponseEntity getOne(@RequestParam Long id) {
+    public Item getOne(@RequestParam Long id) {
+        return itemService.getOne(id);
+        /*
         try {
             return ResponseEntity.ok(itemService.getOne(id));
         } catch (Exception e){
             return ResponseEntity.badRequest().body("Ошибка");
         }
+
+         */
     }
 
     @PostMapping

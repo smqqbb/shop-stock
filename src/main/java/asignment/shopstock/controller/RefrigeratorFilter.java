@@ -3,6 +3,7 @@ package asignment.shopstock.controller;
 
 import asignment.shopstock.entity.Refrigerator;
 import asignment.shopstock.repository.RefrigeratorRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import static asignment.shopstock.specifications.RefrigeratorSpecifications.*;
 
 import java.util.List;
 
+@Tag(name = "Filter")
 @RestController
 public class RefrigeratorFilter {
     @Autowired

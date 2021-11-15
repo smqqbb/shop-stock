@@ -6,13 +6,13 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME,
-              property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = PersonalComputer.class, name = "personalcomputer"),
-        @JsonSubTypes.Type(value = Refrigerator.class, name = "refrigerator"),
-        @JsonSubTypes.Type(value = Smartphone.class, name = "smartphone"),
-        @JsonSubTypes.Type(value = Television.class, name = "television") })
+        @JsonSubTypes.Type(value = PersonalComputer.class, name = "PersonalComputer"),
+        @JsonSubTypes.Type(value = Refrigerator.class    , name = "Refrigerator"    ),
+        @JsonSubTypes.Type(value = Smartphone.class      , name = "Smartphone"      ),
+        @JsonSubTypes.Type(value = Television.class      , name = "Television"      )
+})
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING,
@@ -31,6 +31,7 @@ public abstract class Model {
     @ManyToOne
     @JoinColumn
     private Item item;
+
 
     public long getId() {
         return id;

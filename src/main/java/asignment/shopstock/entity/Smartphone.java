@@ -1,9 +1,11 @@
 package asignment.shopstock.entity;
 
+
 import javax.persistence.Entity;
 
 @Entity
 public class Smartphone extends Model{
+
     private long serialNumber;
     private long storageInGigs;
     private long numberOfCameras;

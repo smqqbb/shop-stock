@@ -2,6 +2,7 @@ package asignment.shopstock.controller;
 
 import asignment.shopstock.entity.Smartphone;
 import asignment.shopstock.repository.SmartphoneRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,7 @@ import java.util.List;
 import static asignment.shopstock.specifications.SmartphoneSpecifications.*;
 
 
+@Tag(name = "Filter")
 @RestController
 public class SmartphoneFilter {
     @Autowired

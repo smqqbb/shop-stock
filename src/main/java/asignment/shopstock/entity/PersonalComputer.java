@@ -1,9 +1,11 @@
 package asignment.shopstock.entity;
 
+
 import javax.persistence.Entity;
 
 @Entity
 public class PersonalComputer extends Model{
+
     private long serialNumber;
     private String modelType;
     private String processorType;

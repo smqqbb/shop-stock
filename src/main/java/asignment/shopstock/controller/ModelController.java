@@ -1,13 +1,15 @@
 package asignment.shopstock.controller;
 
-import asignment.shopstock.entity.Item;
 import asignment.shopstock.entity.Model;
-import asignment.shopstock.service.ItemService;
 import asignment.shopstock.service.ModelService;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+@Tag(name = "Model")
 @RestController
 @RequestMapping("/models")
 public class ModelController {
@@ -24,7 +26,9 @@ public class ModelController {
     }
 
     @PostMapping
-    public ResponseEntity addOne(@RequestBody Model model,
+    public ResponseEntity addOne(@RequestBody
+                                             (content = @Content(schema = @Schema(implementation = Model.class)))
+                                             Model model,
                                  @RequestParam Long id) {
         try {
             modelService.saveOne(model, id);

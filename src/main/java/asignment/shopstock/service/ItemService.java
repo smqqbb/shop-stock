@@ -10,8 +10,8 @@ public class ItemService {
     @Autowired
     ItemRepository itemRepository;
 
-    public Object getOne(Long id) {
-        return itemRepository.findById(id);
+    public Item getOne(Long id) {
+        return itemRepository.findById(id).get();
     }
 
     public void saveOne(Item item) {

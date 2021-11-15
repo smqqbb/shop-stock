@@ -1,6 +1,5 @@
 package asignment.shopstock.entity;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -9,7 +8,7 @@ import java.util.Set;
 public class Item{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long itemId;
+    private long id;
 
     private String itemName;
     private String country;
