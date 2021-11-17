@@ -26,7 +26,7 @@ public class ModelController {
     }
 
     @PostMapping
-    public ResponseEntity addOne(@RequestBody
+    public ResponseEntity addOne(@org.springframework.web.bind.annotation.RequestBody @RequestBody
                                              (content = @Content(schema = @Schema(implementation = Model.class)))
                                              Model model,
                                  @RequestParam Long id) {
