@@ -17,14 +17,6 @@ public class ItemController {
     @GetMapping
     public Item getOne(@RequestParam Long id) {
         return itemService.getOne(id);
-        /*
-        try {
-            return ResponseEntity.ok(itemService.getOne(id));
-        } catch (Exception e){
-            return ResponseEntity.badRequest().body("Ошибка");
-        }
-
-         */
     }
 
     @PostMapping
