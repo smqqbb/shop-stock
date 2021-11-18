@@ -2,8 +2,7 @@ openapi: 3.0.1
 info:
   title: Shopstock API
 servers:
-- url: http://localhost:8080
-  description: Generated server url
+- url: http://shop-stock.herokuapp.com/
 paths:
   /models:
     get:
@@ -77,6 +76,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Model'
+        required: true
       responses:
         "200":
           description: OK
